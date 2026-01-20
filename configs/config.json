@@ -1,0 +1,16 @@
+{
+  "USER_NAME": "qiuhaodi",
+  "MAIN_TEST_PATH": "/data/hd_qiu/reinvent/Reinvent-master-copy/test",
+  "DEVELOPMENT_ENVIRONMENT": true,
+  "ENVIRONMENTAL_VARIABLES": {
+    "PIP_URL": "<that`s confidential>",
+    "PIP_KEY": "<that`s confidential>"
+  },
+  "ACTIVITY_REGRESSION": "",
+  "ACTIVITY_CLASSIFICATION": "",
+  "SMILES_SET_PATH": "",
+  "PRIOR_PATH": "",
+  "LIBINVENT_PRIOR_PATH": "",
+  "SMILES_SET_LINK_INVENT_PATH":"",
+  "LINK_INVENT_PRIOR_PATH": ""
+}

@@ -1,0 +1,123 @@
+{
+    "logging": {
+        "job_id": "demo",
+        "job_name": "Reinforcement learning CAD",
+        "logging_frequency": 1,
+        "logging_path": "/path/to/save/progress.log",
+        "recipient": "local",
+        "result_folder": "/path/to/save/results",
+        "sender": "http://0.0.0.1"
+    },
+    "model_type": "link_invent",
+
+    "parameters": {
+        "actor": "/path/to/MC-INVENT-master/cdk9/prior.model",
+        "critic": "/path/to/MC-INVENT-master/cdk9/prior.model",
+        "warheads": [
+            "FC1=CN=C(C=C1C2=CC=C(F)C([*])=C2)NC3=CC=C([*])C=C3"
+        ],
+        "n_steps": 200,
+        "learning_rate": 0.00001,
+        "batch_size": 100,
+        "randomize_warheads": true,
+        "learning_strategy": {
+            "name": "dap",
+            "parameters": {
+                "sigma": 120
+            }
+        },
+        "scoring_strategy": {
+            "name": "link_invent",
+            "diversity_filter": {
+                "bucket_size": 25,
+                "minscore": 0,
+                "minsimilarity": 0,
+                "name": "IdenticalMurckoScaffold"
+            },
+            "scoring_function": {
+                "name": "custom_sum",
+                "parallel": false,
+                "parameters": [
+                    {
+                        "component_type": "custom_alerts",
+                        "name": "CustomAlerts",
+                        "weight": 1,
+                        "specific_parameters": {
+                        "smiles": [
+                                "[#8][#8]",
+                                "[#6;+]",
+                                "[#16][#16]",
+                                "[#7;!n][S;!$(S(=O)=O)]",
+                                "[#7;!n][#7;!n]",
+                                "[C,c]=,#[C,c]",
+                                "[NX3&H0]",
+                                "[C,O,S]C(=[O,S])[O,S]",
+                                "[#7;!n]C(=[O,S])[S]",
+                                "[#7;!n]C(=S)[O]",
+                                "S(=O)(=O)O",
+                                "[#7;!n][C;!$(C(=[O,N])[N,O])][#16;!s]",
+                                "[#7;!n][C;!$(C(=[O,N])[N,O])][#7;!n]",
+                                "[#7;!n][C;!$(C(=[O,N])[N,O])][#8;!o]",
+                                "[#8;!o][C;!$(C(=[O,N])[N,O])][#16;!s]",
+                                "[#8;!o][C;!$(C(=[O,N])[N,O])][#8;!o]",
+                                "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]"
+                                ]
+                        }
+                    },
+                    {
+                        "component_type": "macro_rdkit_rmsd",
+                        "name": "MacroRdkitRMSD",
+                        "specific_parameters": {
+                            "ref_path": "/path/to/MC-INVENT-master/cdk9/4bci_scaffold.sdf",
+                            "ref_type": "sdf",
+                            "transformation": {
+                                "high": 2,
+                                "k": 0.4,
+                                "low": 0,
+                                "transformation_type": "reverse_sigmoid"
+                            }
+                        },
+                        "weight": 1
+                    },
+                    {
+                        "component_type": "recap_connector_rascore",
+                        "name": "RecapConnectorRAScore",
+                        "specific_parameters": {
+                            "smiles": "FC1=CN=C(C=C1C2=CC=C(F)C([*])=C2)NC3=CC=C([*])C=C3",
+                            "memory_path": "/path/to/save/results/synscore_memory.csv"
+                        },
+                        "weight": 1
+                    },
+                    {
+                        "component_type": "macro_linker_hr",
+                        "name": "MacroLinkerHR",
+                        "specific_parameters": {
+                            "smiles": "FC1=CN=C(C=C1C2=CC=C(F)C([*])=C2)NC3=CC=C([*])C=C3",
+                            "transformation": {
+                                "high": 0.3,
+                                "low": 0,
+                                "transformation_type": "step"
+                            }
+                        },
+                        "weight": 1
+                    },
+                    {
+                        "component_type": "macro_linker_cc",
+                        "name": "MacroLinkerCC",
+                        "specific_parameters": {
+                            "smiles": "FC1=CN=C(C=C1C2=CC=C(F)C([*])=C2)NC3=CC=C([*])C=C3",
+                            "transformation": {
+                                "high": 1,
+                                "low": 0,
+                                "transformation_type": "step"
+                            }
+                        },
+                        "weight": 1
+                    }
+                ]
+            }
+        }
+    },
+    "run_type": "reinforcement_learning",
+    "version": 3
+}

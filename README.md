@@ -6,8 +6,8 @@ Molecular generative model to design Macrocycle ligands.
 1. Install [Conda](https://conda.io/projects/conda/en/latest/index.html)
 2. Clone this Git repository
 3. Open a shell, and go to the repository and create the Conda environment:
-   
-        $ conda env create -f mcinvent.yml
+```bash   
+conda env create -f mcinvent.yml
 
 4. Activate the environment:
 

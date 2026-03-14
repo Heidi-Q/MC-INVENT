@@ -1,5 +1,18 @@
 # MC-INVENT
 Molecular generative model to design Macrocycle ligands. 
+## Data availability
+
+The training data and pretrained model used in this study are provided in this repository.
+
+Specifically, the following files can be found in the `CDK9` directory:
+
+- `trainset.txt`: training dataset used to build the prior model
+- `prior.model`: pretrained prior model
+
+These files allow users to reproduce the training and molecular generation workflow described in this work.
+
+-------------
+
 ## Quick start
 
 Installation

@@ -2,7 +2,6 @@
 Molecular generative model to design Macrocycle ligands. 
 
 ## Installation
--------------
 
 1. Install [Conda](https://conda.io/projects/conda/en/latest/index.html)
 2. Clone this Git repository
@@ -48,4 +47,3 @@ Specifically, the following files can be found in the `CDK9` directory:
 
 These files allow users to reproduce the training and molecular generation workflow described in this work.
 
--------------		
